@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "7acae6cf-0618-4a5e-8742-a40531b60967",
+		"name": "NS8",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:4999/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"test\",\r\n  \"phone\": \"444-333-1111\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:4999/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "4999",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4999/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"test\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:4999/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4999",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4999/events/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4999/events/all",
+					"host": [
+						"localhost"
+					],
+					"port": "4999",
+					"path": [
+						"events",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4999/events/user?email=other@lac.com",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4999/events/user?email=other@lac.com",
+					"host": [
+						"localhost"
+					],
+					"port": "4999",
+					"path": [
+						"events",
+						"user"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "other@lac.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4999/events/lastday",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4999/events/lastday",
+					"host": [
+						"localhost"
+					],
+					"port": "4999",
+					"path": [
+						"events",
+						"lastday"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

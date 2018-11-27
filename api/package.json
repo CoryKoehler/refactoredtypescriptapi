@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch & nodemon dist",
+    "dev": "nodemon dist",
+    "compile": "tsc --watch",
     "test": "tsc && mocha dist/**/*.spec.js",
     "lint": "eslint src --ext ts",
     "tsc": "tsc"
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/mocha": "2.2.41",
+    "@types/mongoose": "^5.3.1",
     "@types/node": "7.0.22",
     "eslint": "4.0.0",
     "eslint-config-airbnb-base": "11.2.0",

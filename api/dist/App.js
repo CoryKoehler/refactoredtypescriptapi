@@ -1,91 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const bodyParser = require("body-parser");
 const express = require("express");
-const loki = require("lokijs");
-const bodyParser = require('body-parser');
-const moment = require('moment');
+const mongoose = require("mongoose");
+const authRoutes_1 = require("./routes/authRoutes");
+const eventRoutes_1 = require("./routes/eventRoutes");
+const userRoutes_1 = require("./routes/userRoutes");
 class App {
     constructor() {
-        const db = new loki('loki.json');
-        this.users = db.addCollection('users');
-        this.events = db.addCollection('events');
-        this.express = express();
-        this.express.use(bodyParser.json());
-        this.mountRoutes();
+        this.authRoutes = new authRoutes_1.AuthRoutes();
+        this.eventRoutes = new eventRoutes_1.EventRoutes();
+        this.userRoutes = new userRoutes_1.UserRoutes();
+        this.mongoUrl = 'mongodb://localhost/db';
+        this.app = express();
+        this.config();
+        this.authRoutes.routes(this.app);
+        this.eventRoutes.routes(this.app);
+        this.userRoutes.routes(this.app);
+        this.mongoSetup();
     }
-    mountRoutes() {
-        const router = express.Router();
-        router.get('/events/all', (req, res) => {
-            const eventsAll = this.events.find({});
-            const events = [];
-            eventsAll.forEach(event => events.push({ type: event.type, created: event.meta.created }));
-            res.json(events);
-        });
-        router.get('/events/user/', (req, res) => {
-            const { email } = req.query;
-            if (!email) {
-                res.status(500).json({
-                    message: 'Provide an email to search for events of user'
-                });
-                return;
-            }
-            const events = [];
-            this.events.find({ user: email }).forEach(event => events.push({ type: event.type, created: event.meta.created }));
-            res.json(events);
-        });
-        router.get('/events/lastday', (req, res) => {
-            const timeLastDay = moment().utc().valueOf() - 86400000;
-            const eventsAll = this.events.find({});
-            const events = [];
-            eventsAll.forEach(event => {
-                if (event.meta.created < timeLastDay)
-                    return;
-                events.push({ type: event.type, created: event.meta.created });
-            });
-            res.json(events);
-        });
-        router.post('/signup', (req, res) => {
-            const { email, phone, password } = req.body;
-            if (!email || !password) {
-                res.status(500).json({
-                    message: 'Provide required fields, Email or Passoword missing'
-                });
-                return;
-            }
-            const user = this.users.findOne({ 'email': email });
-            if (user) {
-                res.status(500).json({
-                    message: 'User already exists'
-                });
-                return;
-            }
-            this.users.insert({ email, phone, password });
-            res.json({
-                message: `Created user with email ${email}`
-            });
-        });
-        router.post('/login', (req, res) => {
-            const { email, password } = req.body;
-            if (!email || !password) {
-                res.status(500).json({
-                    message: 'Provide required fields, Email or Password missing'
-                });
-                return;
-            }
-            const user = this.users.findOne({ 'email': email, password });
-            if (!user) {
-                res.status(500).json({
-                    message: 'User does not exist'
-                });
-                return;
-            }
-            this.events.insert({ type: 'LOGIN', user: email });
-            res.json({
-                message: `Login ${user.email}`
-            });
-        });
-        this.express.use('/', router);
+    config() {
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(express.static('public'));
+    }
+    mongoSetup() {
+        mongoose.connect(this.mongoUrl);
     }
 }
-exports.default = new App().express;
+exports.default = new App().app;
 //# sourceMappingURL=App.js.map

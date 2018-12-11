@@ -1,4 +1,4 @@
-# NS8-API
+# Refer to Readmecontinued.md Disclaimer - was given incorrectly as a starting place with the 4 task below that I never finished, and this code should never be used seriously, providing it online for sharing purposes
 
 ## Description
 API to serve data over RESTful calls for a user tracking software. The server uses lokijs, a in-memory JavaScript Datastore with Persistence.

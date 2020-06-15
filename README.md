@@ -1,4 +1,8 @@
-# Refer to Readmecontinued.md Disclaimer - was given incorrectly as a starting place with the 4 task below that I never finished, and this code should never be used seriously, providing it online for sharing purposes
+# Refer to Readmecontinued.md Disclaimer - was given incorrectly as a starting place with the 4 task below that I never finished, and this code should never be used seriously, providing it online for sharing purposes as a pseudo kata
+
+This came from the below git hubs and the refactoring was just a pseudo kata for myself
+- [V1.0.0](https://github.com/dalenguyen/rest-api-node-typescript/tree/v1.0.0): you can run the server directly after cloning this version. It will create a simple RESTful API over HTTP. 
+- [V2.0.0](https://github.com/dalenguyen/rest-api-node-typescript/tree/v2.0.0): this is a more secure and control API project. You need to read the post on [how to secure RESTful API application](https://itnext.io/building-restful-web-apis-with-node-js-express-mongodb-and-typescript-part-5-a80e5a7f03db) first. After that, you can run the project.
 
 ## Description
 API to serve data over RESTful calls for a user tracking software. The server uses lokijs, a in-memory JavaScript Datastore with Persistence.
